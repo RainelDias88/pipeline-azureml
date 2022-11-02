@@ -16,7 +16,7 @@ module among various combination of model. The model performed slightly better t
 Regression Model.
 
 ## Scikit-learn Pipeline
-
+**Explain the pipeline architecture, including data, hyperparameter tuning, and classification algorithm.**
 The scikit learn pipeline is a classification model built using the `ScriptRunConfig`, which is one the core 
 functionality of Azure Machine Learning. The pipeline intakes an yaml file to  build the environment for the each child 
 experiment. The data is sent to the pipeline using pandas dataframe. The `train.py` script implements a logistic 
@@ -29,9 +29,11 @@ ps = RandomParameterSampling({
         "--C":uniform(0.01,1),
         "--max_iter": choice(50, 80, 100)})
 ```
+**The benefits of the chosen parameter smapling method**
 The benefit of choosing random parameter for regularization is to find the optimum value to maximize accuracy.
 With `RandomParameterSampling` we can get a idea of the search space and they can further refine after the initial runs.
 
+**The benefits of the early stopping policy**
 The early termination policy is based on the slack factor and evaluation interval. The idea is to check in the interval 
 of metric reported and see if the change in metric is significant enough to carry on more intervals. The calculation of
 this change is determined by the formula `(last_interval_metric/(1+slack_factor))`[link](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-tune-hyperparameters#bandit-policy)
